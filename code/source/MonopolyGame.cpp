@@ -6,10 +6,12 @@ MonopolyGame::MonopolyGame(std::initializer_list<IPlayer> il) {
             addPlayer(it);
 
         board.resize(40);
-        board[0] = TYPEOFSQUARE::START;
 
-        for(int i = 1; i < board.size(); i++)
-            board[i] = TYPEOFSQUARE::PENALTY;
+        board[0].addEvent(std::make_shared<Events::Start>());
+
+        for(int i = 1; i < 40; i++)
+            board[i].addEvent(std::make_shared<Events::Penelty>());
+
 }
 
 void MonopolyGame::addPlayer(const IPlayer& player) {
@@ -19,7 +21,7 @@ void MonopolyGame::addPlayer(const IPlayer& player) {
 void MonopolyGame::startGame() {
     checkConstrains();
 
-    for(int currPlayerIterator = 0; (players.size() != 1); currPlayerIterator = (currPlayerIterator + 1) % players.size()) {
+    for(int currPlayerIterator = 0; (players.size() > 1); currPlayerIterator = (currPlayerIterator + 1) % players.size()) {
         processPlayerTurn(currPlayerIterator);
     }
 
@@ -37,10 +39,9 @@ void MonopolyGame::processPlayerTurn(int currPlayerIterator) {
 
     int finalPosition = actPlayer->getPosition();
 
-    if(isPassingStart(startPlayerPosition, finalPosition))
-        actPlayer->receiveMoney(PASSSTARTMONEY);
 
-    processMoveToFinalPos(actPlayer);
+//    processMoveToFinalPos(actPlayer);
+    board[finalPosition].processEvents(actPlayer);
 
 
     if(isPlayerBankrupt(actPlayer))
@@ -50,15 +51,7 @@ void MonopolyGame::processPlayerTurn(int currPlayerIterator) {
 }
 
 bool MonopolyGame::isPlayerBankrupt(std::shared_ptr<IPlayer> player) {
-    return player->getMoney() > 0;
-}
-
-void processMoveToFinalPos(std::shared_ptr... accPlayer){
-    int final_postion = accPlayer->getPostion();
-
-    if(board[final_position] == TYPEOFSQUARE::PENALTY)  accPlayer->receiveMoney(-10);
-
-    if(board[final_position] == TYPEOFSQUARE::REWARD) accPlayer->receiveMoney(10);
+    return player->getMoney() < 0;
 }
 
 bool MonopolyGame::isPassingStart(int start, int end) const{
@@ -85,7 +78,7 @@ int MonopolyGame::throwDices() const {
     return kostkaPierwsza + kostkaDruga;
 }
 
-void MonopolyGame::losePlayer(playerT player) {
+void MonopolyGame::losePlayer(IPlayer::ptr player) {
         players.erase(std::remove(players.begin(), players.end(), player), players.end());
         lostPlayers.push_back(player);
 }

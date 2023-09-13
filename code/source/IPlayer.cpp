@@ -10,18 +10,13 @@ std::ostream &operator<<(std::ostream &out, const IPlayer &player) {
     return out;
 }
 
-int getID(){
-    static int currID;
-    return currID++;
-}
-
 IPlayer::IPlayer(std::string playerName) : name(std::move(playerName))  {
     piece = std::make_shared<IPiece>(STARTINGPOSTION);
-    ID = getID();
+
 }
 
 bool IPlayer::operator==(const IPlayer &lhs) const {
-    return ID == lhs.ID;
+    return playerID == lhs.playerID;
 }
 
 void IPlayer::movePlayer(int pos) {

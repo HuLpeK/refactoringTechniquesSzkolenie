@@ -1,6 +1,7 @@
 #pragma once
 
 #include "IPlayer.hpp"
+#include "Events.hpp"
 #include "Square.hpp"
 #include <algorithm>
 #include <vector>

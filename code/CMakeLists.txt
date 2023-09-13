@@ -12,6 +12,9 @@ add_executable(program main.cpp
         source/Square.cpp
         includes/Square.hpp
         includes/IEvent.hpp
+        includes/Events.hpp
+        includes/ID.hpp
+        source/ID.cpp
 )
 
 include_directories(includes)

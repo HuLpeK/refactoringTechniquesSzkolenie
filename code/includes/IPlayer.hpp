@@ -7,6 +7,7 @@
 #include <utility>
 #include <memory>
 #include "IPiece.hpp"
+#include "ID.hpp"
 
 #define STARTINGPOSTION 0
 
@@ -31,5 +32,5 @@ private:
     int money {100};
     const std::string name {};
 
-    int ID; //todo: dopisac klase ID
+    ID playerID; //todo: dopisac klase playerID
 };
