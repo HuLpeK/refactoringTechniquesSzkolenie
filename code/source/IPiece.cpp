@@ -9,3 +9,7 @@ std::ostream& operator<<(std::ostream &out, const IPiece &piece) {
 void IPiece::movePiece(int position){
     square = (square + position)%40; //TODO: magic number
 }
+
+int IPiece::getPosition() {
+    return square;
+}

@@ -14,15 +14,12 @@ class IPlayer{
 public:
     IPlayer(std::string currName);
     virtual void receiveMoney(int amountOfMoney);
-    int getMoney(){
-        return money;
-    }
+    [[nodiscard]] int getMoney() const;
 
-    void movePlayer(int pos){
-        piece->movePiece(pos);
-    }
+    void movePlayer(int pos);
 
-    int getPosition(){return piece->getPosition();}
+    int getPosition();
+
     bool operator==(const IPlayer& lhs) const;
 
     friend std::ostream& operator<<(std::ostream& out, const IPlayer& player);

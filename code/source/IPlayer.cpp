@@ -1,5 +1,3 @@
-#include <utility>
-
 #include "../includes/IPlayer.hpp"
 
 
@@ -24,4 +22,16 @@ IPlayer::IPlayer(std::string playerName) : name(std::move(playerName))  {
 
 bool IPlayer::operator==(const IPlayer &lhs) const {
     return ID == lhs.ID;
+}
+
+void IPlayer::movePlayer(int pos) {
+        piece->movePiece(pos);
+}
+
+int IPlayer::getMoney() const{
+        return money;
+}
+
+int IPlayer::getPosition() {
+    return piece->getPosition();
 }

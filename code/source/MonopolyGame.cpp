@@ -23,24 +23,24 @@ void MonopolyGame::startGame() {
         std::shared_ptr<IPlayer> accPlayer = players[currPlayerIterator];
         
         int dices = throwDices();
-        int curretnPlayerPosition = accPlayer->getPosition();
+        int currentPlayerPosition = accPlayer->getPosition();
 
-        if(curretnPlayerPosition+dices > 40) accPlayer->receiveMoney(10);
+        if(currentPlayerPosition + dices > 40) accPlayer->receiveMoney(10);
 
-        int final_position = (curretnPlayerPosition+dices)%40;
+        accPlayer->movePlayer(dices);
+        int final_position = accPlayer->getPosition();
 
         if(board[final_position] == TYPEOFSQUARE::PENALTY)  accPlayer->receiveMoney(-10);
 
         if(board[final_position] == TYPEOFSQUARE::REWARD) accPlayer->receiveMoney(10);
 
-        accPlayer->movePlayer(dices);
 
         if(accPlayer->getMoney() < 0) losePlayer(accPlayer);
 
         printGame();
     }
 
-    std::cout << "Gracz: " << *players.front() << " Wygral Gra!";
+    std::cout << "\nGracz: " << *players.front() << " Wygral Gra!";
 }
 
 void MonopolyGame::printGame() {
@@ -63,7 +63,7 @@ int MonopolyGame::throwDices() const {
     return kostkaPierwsza + kostkaDruga;
 }
 
-void MonopolyGame::losePlayer(std::shared_ptr<IPlayer> player) {
+void MonopolyGame::losePlayer(playerT player) {
         players.erase(std::remove(players.begin(), players.end(), player), players.end());
         lostPlayers.push_back(player);
 }

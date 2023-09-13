@@ -6,7 +6,10 @@
 #include <cstdlib>
 #include <ctime>
 
- enum class TYPEOFSQUARE{
+using playerT = std::shared_ptr<IPlayer>;
+using playerList = std::vector<playerT>;
+
+enum class TYPEOFSQUARE{
     DEFAULT,
     START,
     REWARD,
@@ -24,12 +27,13 @@ private:
     void addPlayer(const IPlayer& player);
     [[nodiscard]] int throwDices() const;
     void checkConstrains();
-    std::vector<std::shared_ptr<IPlayer>> players;
-    std::vector<std::shared_ptr<IPlayer>> lostPlayers;
-    void losePlayer(std::shared_ptr<IPlayer> player);
+    playerList players;
+    playerList lostPlayers;
+    void losePlayer(playerT player);
     std::vector<TYPEOFSQUARE> board;
 
 };
 
 
+///
 
