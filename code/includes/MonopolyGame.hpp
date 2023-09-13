@@ -1,20 +1,15 @@
 #pragma once
 
 #include "IPlayer.hpp"
-#include "algorithm"
+#include "Square.hpp"
+#include <algorithm>
 #include <vector>
 #include <cstdlib>
 #include <ctime>
 
-using playerT = std::shared_ptr<IPlayer>;
-using playerList = std::vector<playerT>;
+#define PASSSTARTMONEY 10
 
-enum class TYPEOFSQUARE{
-    DEFAULT,
-    START,
-    REWARD,
-    PENALTY
-};
+using playerList = std::vector<IPlayer::ptr>;
 
 class MonopolyGame {
 public:
@@ -27,10 +22,14 @@ private:
     void addPlayer(const IPlayer& player);
     [[nodiscard]] int throwDices() const;
     void checkConstrains();
+    bool isPassingStart(int start, int end) const;
+    bool isPlayerBankrupt(std::shared_ptr<IPlayer> player);
+
+    void processPlayerTurn(int currPlayerIterator);
     playerList players;
     playerList lostPlayers;
-    void losePlayer(playerT player);
-    std::vector<TYPEOFSQUARE> board;
+    void losePlayer(IPlayer::ptr player);
+    std::vector<Square> board;
 
 };
 

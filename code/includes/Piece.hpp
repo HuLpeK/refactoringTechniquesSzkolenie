@@ -4,6 +4,6 @@
 
 class Piece : public IPiece {
 public:
-    Piece(int initialPOsition);
+    Piece(int initialPosition);
 
 };

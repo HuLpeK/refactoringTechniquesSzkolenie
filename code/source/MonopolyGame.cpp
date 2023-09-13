@@ -20,27 +20,49 @@ void MonopolyGame::startGame() {
     checkConstrains();
 
     for(int currPlayerIterator = 0; (players.size() != 1); currPlayerIterator = (currPlayerIterator + 1) % players.size()) {
-        std::shared_ptr<IPlayer> accPlayer = players[currPlayerIterator];
-        
-        int dices = throwDices();
-        int currentPlayerPosition = accPlayer->getPosition();
-
-        if(currentPlayerPosition + dices > 40) accPlayer->receiveMoney(10);
-
-        accPlayer->movePlayer(dices);
-        int final_position = accPlayer->getPosition();
-
-        if(board[final_position] == TYPEOFSQUARE::PENALTY)  accPlayer->receiveMoney(-10);
-
-        if(board[final_position] == TYPEOFSQUARE::REWARD) accPlayer->receiveMoney(10);
-
-
-        if(accPlayer->getMoney() < 0) losePlayer(accPlayer);
-
-        printGame();
+        processPlayerTurn(currPlayerIterator);
     }
 
     std::cout << "\nGracz: " << *players.front() << " Wygral Gra!";
+}
+
+void MonopolyGame::processPlayerTurn(int currPlayerIterator) {
+    std::shared_ptr<IPlayer> actPlayer = players[currPlayerIterator];
+
+    int dices = throwDices();
+    int startPlayerPosition = actPlayer->getPosition();
+
+
+    actPlayer->movePlayer(dices);
+
+    int finalPosition = actPlayer->getPosition();
+
+    if(isPassingStart(startPlayerPosition, finalPosition))
+        actPlayer->receiveMoney(PASSSTARTMONEY);
+
+    processMoveToFinalPos(actPlayer);
+
+
+    if(isPlayerBankrupt(actPlayer))
+        losePlayer(actPlayer);
+
+    printGame();
+}
+
+bool MonopolyGame::isPlayerBankrupt(std::shared_ptr<IPlayer> player) {
+    return player->getMoney() > 0;
+}
+
+void processMoveToFinalPos(std::shared_ptr... accPlayer){
+    int final_postion = accPlayer->getPostion();
+
+    if(board[final_position] == TYPEOFSQUARE::PENALTY)  accPlayer->receiveMoney(-10);
+
+    if(board[final_position] == TYPEOFSQUARE::REWARD) accPlayer->receiveMoney(10);
+}
+
+bool MonopolyGame::isPassingStart(int start, int end) const{
+    return start > end;
 }
 
 void MonopolyGame::printGame() {

@@ -9,6 +9,9 @@ add_executable(program main.cpp
         includes/Piece.hpp
         source/MonopolyGame.cpp
         includes/MonopolyGame.hpp
+        source/Square.cpp
+        includes/Square.hpp
+        includes/IEvent.hpp
 )
 
 include_directories(includes)

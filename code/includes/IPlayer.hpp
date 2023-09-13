@@ -23,10 +23,13 @@ public:
     bool operator==(const IPlayer& lhs) const;
 
     friend std::ostream& operator<<(std::ostream& out, const IPlayer& player);
+
+    using ptr = std::shared_ptr<IPlayer>;
+
 private:
     std::shared_ptr<IPiece> piece;
     int money {100};
     const std::string name {};
 
-    int ID;
+    int ID; //todo: dopisac klase ID
 };
