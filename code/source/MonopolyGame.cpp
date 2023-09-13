@@ -1,6 +1,6 @@
 #include "MonopolyGame.hpp"
 
-MonopolyGame::MonopolyGame(std::initializer_list<IPlayer> il) {
+MonopolyGame::MonopolyGame(std::initializer_list<Player> il) {
         players.reserve(8);
         for(const auto& it: il)
             addPlayer(it);
@@ -14,8 +14,8 @@ MonopolyGame::MonopolyGame(std::initializer_list<IPlayer> il) {
 
 }
 
-void MonopolyGame::addPlayer(const IPlayer& player) {
-    players.push_back(std::make_shared<IPlayer>(player));
+void MonopolyGame::addPlayer(const Player& player) {
+    players.push_back(std::make_shared<Player>(player));
 }
 
 void MonopolyGame::startGame() {
@@ -29,7 +29,7 @@ void MonopolyGame::startGame() {
 }
 
 void MonopolyGame::processPlayerTurn(int currPlayerIterator) {
-    std::shared_ptr<IPlayer> actPlayer = players[currPlayerIterator];
+    std::shared_ptr<Player> actPlayer = players[currPlayerIterator];
 
     int dices = throwDices();
     int startPlayerPosition = actPlayer->getPosition();
@@ -50,7 +50,7 @@ void MonopolyGame::processPlayerTurn(int currPlayerIterator) {
     printGame();
 }
 
-bool MonopolyGame::isPlayerBankrupt(std::shared_ptr<IPlayer> player) {
+bool MonopolyGame::isPlayerBankrupt(std::shared_ptr<Player> player) {
     return player->getMoney() < 0;
 }
 
@@ -78,7 +78,7 @@ int MonopolyGame::throwDices() const {
     return kostkaPierwsza + kostkaDruga;
 }
 
-void MonopolyGame::losePlayer(IPlayer::ptr player) {
+void MonopolyGame::losePlayer(Player::ptr player) {
         players.erase(std::remove(players.begin(), players.end(), player), players.end());
         lostPlayers.push_back(player);
 }

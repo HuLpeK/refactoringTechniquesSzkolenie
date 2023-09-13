@@ -1,7 +1,7 @@
 #pragma once
-#include "IPlayer.hpp"
+#include "Player.hpp"
 
 class IEvent{
 public:
-    virtual void processPlayer(IPlayer::ptr)=0;
+    virtual void processPlayer(Player::ptr)=0;
 };
