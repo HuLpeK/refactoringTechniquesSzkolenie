@@ -63,5 +63,10 @@ int MonopolyGame::throwDices() const {
     return kostkaPierwsza + kostkaDruga;
 }
 
+void MonopolyGame::losePlayer(std::shared_ptr<IPlayer> player) {
+        players.erase(std::remove(players.begin(), players.end(), player), players.end());
+        lostPlayers.push_back(player);
+}
+
 
 

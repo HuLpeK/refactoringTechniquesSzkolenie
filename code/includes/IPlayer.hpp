@@ -23,9 +23,7 @@ public:
     }
 
     int getPosition(){return piece->getPosition();}
-    bool operator==(const IPlayer& lhs){
-        return ID == lhs.ID;
-    }
+    bool operator==(const IPlayer& lhs) const;
 
     friend std::ostream& operator<<(std::ostream& out, const IPlayer& player);
 private:

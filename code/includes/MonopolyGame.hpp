@@ -26,10 +26,7 @@ private:
     void checkConstrains();
     std::vector<std::shared_ptr<IPlayer>> players;
     std::vector<std::shared_ptr<IPlayer>> lostPlayers;
-    void losePlayer(std::shared_ptr<IPlayer> player){
-        players.erase(std::remove(players.begin(), players.end(), player), players.end());
-        lostPlayers.push_back(player);
-    }
+    void losePlayer(std::shared_ptr<IPlayer> player);
     std::vector<TYPEOFSQUARE> board;
 
 };

@@ -8,7 +8,7 @@ void IPlayer::receiveMoney(int amountOfMoney) { //TODO zastanowic sie co jesli m
 }
 
 std::ostream &operator<<(std::ostream &out, const IPlayer &player) {
-    out << "Imie: " << player.name << " Money: " << player.money << " " << *player.piece;
+    out << "Imie: " << player.name << " Pieniadze: " << player.money << " " << *player.piece;
     return out;
 }
 
@@ -20,4 +20,8 @@ int getID(){
 IPlayer::IPlayer(std::string playerName) : name(std::move(playerName))  {
     piece = std::make_shared<IPiece>(STARTINGPOSTION);
     ID = getID();
+}
+
+bool IPlayer::operator==(const IPlayer &lhs) const {
+    return ID == lhs.ID;
 }
