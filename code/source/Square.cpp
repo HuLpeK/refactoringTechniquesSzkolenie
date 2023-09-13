@@ -11,7 +11,7 @@ void Square::addEvent(std::shared_ptr<IEvent> newEvent) {
     eventList.push_back(std::move(newEvent));
 }
 
-void Square::processEvents(Player::ptr player) {
+void Square::processEvents(std::shared_ptr<class Player> player) {
     for(const auto& it : eventList)
         it->processPlayer(player);
 }

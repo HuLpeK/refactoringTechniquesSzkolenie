@@ -7,29 +7,25 @@
 #include <algorithm>
 #include <vector>
 
-#define PASSSTARTMONEY 10
-
 using playerList = std::vector<Player::ptr>;
 
 class MonopolyGame {
 public:
-    MonopolyGame(std::initializer_list<Player> il);
+    MonopolyGame(std::initializer_list<std::string> il);
 
     void startGame();
 
 private:
     void printGame();
-    void addPlayer(const Player& player);
+    void addPlayer(const std::string &playerName);
     void checkConstrains();
-    bool isPassingStart(int start, int end) const;
-    bool isPlayerBankrupt(std::shared_ptr<Player> player);
     void processPlayerTurn(int currPlayerIterator);
     void losePlayer(Player::ptr player);
 
-    dice rollingDice;
-    playerList players;
-    playerList lostPlayers;
-    std::vector<Square> board;
+    dice rollingDice {};
+    playerList players {};
+    playerList lostPlayers {};
+    std::vector<Square> board {};
 
 };
 

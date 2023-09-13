@@ -2,9 +2,8 @@
 #include "MonopolyGame.hpp"
 
 int main() {
-    Player x("12");
 
-    MonopolyGame game{x, {"13"}};
+    MonopolyGame game{{"12"}, {"13"}};
 
     game.startGame();
 }

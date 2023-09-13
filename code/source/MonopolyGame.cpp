@@ -1,6 +1,6 @@
 #include "MonopolyGame.hpp"
 
-MonopolyGame::MonopolyGame(std::initializer_list<Player> il) {
+MonopolyGame::MonopolyGame(std::initializer_list<std::string> il) {
         players.reserve(8);
         for(const auto& it: il)
             addPlayer(it);
@@ -14,8 +14,8 @@ MonopolyGame::MonopolyGame(std::initializer_list<Player> il) {
 
 }
 
-void MonopolyGame::addPlayer(const Player& player) {
-    players.push_back(std::make_shared<Player>(player));
+void MonopolyGame::addPlayer(const std::string &playerName) {
+    players.push_back(std::make_shared<Player>(playerName, board));
 }
 
 void MonopolyGame::startGame() {
@@ -31,29 +31,13 @@ void MonopolyGame::startGame() {
 void MonopolyGame::processPlayerTurn(int currPlayerIterator) {
     std::shared_ptr<Player> actPlayer = players[currPlayerIterator];
 
-    int dices = rollingDice.throwTwoDices();
-
-
-    actPlayer->movePlayer(dices);
-
-    int finalPosition = actPlayer->getPosition();
-
-
-    board[finalPosition].processEvents(actPlayer);
-
-
-    if(isPlayerBankrupt(actPlayer))
+    try{
+        actPlayer->performMove(rollingDice.throwTwoDices());
+    }catch(...){
         losePlayer(actPlayer);
+    }
 
     printGame();
-}
-
-bool MonopolyGame::isPlayerBankrupt(std::shared_ptr<Player> player) {
-    return player->getMoney() < 0;
-}
-
-bool MonopolyGame::isPassingStart(int start, int end) const{
-    return start > end;
 }
 
 void MonopolyGame::printGame() {

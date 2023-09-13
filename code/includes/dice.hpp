@@ -4,13 +4,14 @@
 class dice {
 public:
     int throwTwoDices();
+    dice()=default;
 
 private:
    int throwDice();
 
    const int DICESIZE = 6;
 
-   std::random_device rd;
+    std::default_random_engine generator;
 };
 
 

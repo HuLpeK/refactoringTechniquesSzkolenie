@@ -1,8 +1,3 @@
-//
-// Created by Hubert Kulpaczyński
-// For Project refactoringTechniques
-//
-
 #include "dice.hpp"
 
 
@@ -11,5 +6,5 @@ int dice::throwTwoDices()  {
 }
 
 int dice::throwDice()  {
-    return (int)rd() % DICESIZE + 1;
+    return std::uniform_int_distribution<int>(1,DICESIZE)(generator);
 }

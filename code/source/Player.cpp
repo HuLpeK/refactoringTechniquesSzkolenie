@@ -1,4 +1,7 @@
+#include <utility>
+
 #include "../includes/Player.hpp"
+#include "Events.hpp"
 
 
 void Player::receiveMoney(int amountOfMoney) { //TODO zastanowic sie co jesli money < 0
@@ -10,7 +13,7 @@ std::ostream &operator<<(std::ostream &out, const Player &player) {
     return out;
 }
 
-Player::Player(std::string playerName) : name(std::move(playerName))  {
+Player::Player(std::string playerName, std::vector<Square>& bo) : name(std::move(playerName)), board(bo)  {
     piece = std::make_shared<Piece>(STARTINGPOSTION);
 }
 
@@ -28,4 +31,27 @@ int Player::getMoney() const{
 
 int Player::getPosition() {
     return piece->getPosition();
+}
+
+void Player::performMove(int diceRolled) {
+    const int startingPosition = getPosition();
+    movePlayer(diceRolled);
+
+    handleMovingThroughStart(startingPosition);
+    board[getPosition()].processEvents(shared_from_this());
+
+    if(isPlayerBankrupt())
+        throw std::out_of_range("I'm Bankrupt!");
+}
+
+bool Player::isPlayerBankrupt() const {
+    return money < 0;
+}
+
+void Player::handleMovingThroughStart(int startingPosition) {
+    if(startingPosition <= getPosition() and getPosition() != 0)
+        return;
+
+    board[STARTINGPOSTION].processEvents(shared_from_this());
+
 }

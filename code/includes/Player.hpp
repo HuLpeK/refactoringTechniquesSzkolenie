@@ -2,35 +2,42 @@
 
 #pragma once
 
+#include "Square.hpp"
+#include "Piece.hpp"
+#include "ID.hpp"
 #include <string>
 #include <iostream>
 #include <utility>
 #include <memory>
-#include "Piece.hpp"
-#include "ID.hpp"
+#include <vector>
 
 #define STARTINGPOSTION 0
 
-class Player{
+class Player : public std::enable_shared_from_this<Player>{
 public:
-    Player(std::string currName);
-    virtual void receiveMoney(int amountOfMoney);
-    [[nodiscard]] int getMoney() const;
+    Player(std::string playerName, std::vector<Square>& bo);
 
-    void movePlayer(int pos);
+    void performMove(int diceRolled);
 
-    int getPosition();
+    void receiveMoney(int amountOfMoney);
 
     bool operator==(const Player& lhs) const;
 
     friend std::ostream& operator<<(std::ostream& out, const Player& player);
 
     using ptr = std::shared_ptr<Player>;
-
 private:
+    [[nodiscard]] int getMoney() const;
+    void handleMovingThroughStart(int startingPosition);
+    void movePlayer(int pos);
+
+    int getPosition();
+
+    bool isPlayerBankrupt() const;
+    std::vector<Square>& board;
+
     std::shared_ptr<Piece> piece;
     int money {100};
     const std::string name {};
-
     ID playerID; //todo: powtorzenieTypu
 };

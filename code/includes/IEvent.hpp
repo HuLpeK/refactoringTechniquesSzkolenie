@@ -1,7 +1,9 @@
 #pragma once
-#include "Player.hpp"
+
+
+#include <memory>
 
 class IEvent{
 public:
-    virtual void processPlayer(Player::ptr)=0;
+    virtual void processPlayer(std::shared_ptr<class Player>)=0;
 };

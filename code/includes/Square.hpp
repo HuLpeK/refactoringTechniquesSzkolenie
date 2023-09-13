@@ -9,7 +9,7 @@ public:
 
     void addEvent(std::shared_ptr<IEvent> newEvent);
 
-    void processEvents(Player::ptr player);
+    void processEvents(std::shared_ptr<class Player> player);
 private:
 
     std::list<std::shared_ptr<IEvent>> eventList;
