@@ -14,30 +14,40 @@ MonopolyGame::MonopolyGame(std::initializer_list<IPlayer> il) {
 }
 
 void MonopolyGame::addPlayer(const IPlayer& player) {
-    players.push_back(player);
+    players.push_back(std::make_shared<IPlayer>(player));
 }
 
 void MonopolyGame::startGame() {
     checkConstrains();
     for(int currPlayerIterator = 0; (players.size() != 1); currPlayerIterator = (currPlayerIterator + 1) % players.size()) {
-        IPlayer accPlayer = players[currPlayerIterator];
+        std::shared_ptr<IPlayer> accPlayer = players[currPlayerIterator];
         
         int dices = throwDices();
-        int curretnPlayerPosition = accPlayer.getPosition();
+        int curretnPlayerPosition = accPlayer->getPosition();
 
-        if(curretnPlayerPosition+dices > 40) accPlayer.receiveMoney(10);
+        if(curretnPlayerPosition+dices > 40) accPlayer->receiveMoney(10);
 
         int final_position = (curretnPlayerPosition+dices)%40;
 
-        if(board[final_position] == TYPEOFSQUARE::PENALTY)  accPlayer.receiveMoney(-10);
+        if(board[final_position] == TYPEOFSQUARE::PENALTY)  accPlayer->receiveMoney(-1);
 
-        if(board[final_position] == TYPEOFSQUARE::REWARD) accPlayer.receiveMoney(10); 
+        if(board[final_position] == TYPEOFSQUARE::REWARD) accPlayer->receiveMoney(10);
 
-        if(accPlayer.getMoney() < 0) loosePlayer(accPlayer);
-        
-        accPlayer.movePlayer(dices);
+        accPlayer->movePlayer(dices);
 
+        if(accPlayer->getMoney() < 0) losePlayer(accPlayer);
+
+        printGame();
     }
+
+    std::cout << "Gracz: " << *players.front() << " Wygral Gra!";
+}
+
+void MonopolyGame::printGame() {
+    std::cout << "==STATUS GRY==\n";
+    for(const auto& it: players)
+        std::cout << *it << "\n";
+    std::cout << "\n\n";
 }
 
 void MonopolyGame::checkConstrains() {

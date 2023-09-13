@@ -5,11 +5,13 @@
 #include "MonopolyGame.hpp"
 
 int main() {
-    Player Hubert("12");
-    std::cout << Hubert << '\n';
+    Player x("12");
+//    std::cout << Hubert << '\n';
+//
+//    Piece piece(10);
+//    std::cout << piece << "\n";
 
-    Piece piece(10);
-    std::cout << piece << "\n";
+    MonopolyGame game{x, {"13"}};
 
-    MonopolyGame game{Hubert};
+    game.startGame();
 }

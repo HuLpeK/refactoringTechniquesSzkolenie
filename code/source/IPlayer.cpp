@@ -4,7 +4,7 @@
 
 
 void IPlayer::receiveMoney(int amountOfMoney) { //TODO zastanowic sie co jesli money < 0
-    money = std::max(0,amountOfMoney+money);
+    money = amountOfMoney+money;
 }
 
 std::ostream &operator<<(std::ostream &out, const IPlayer &player) {
@@ -12,7 +12,12 @@ std::ostream &operator<<(std::ostream &out, const IPlayer &player) {
     return out;
 }
 
+int getID(){
+    static int currID;
+    return currID++;
+}
+
 IPlayer::IPlayer(std::string playerName) : name(std::move(playerName))  {
     piece = std::make_shared<IPiece>(STARTINGPOSTION);
-
+    ID = getID();
 }

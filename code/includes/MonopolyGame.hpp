@@ -20,13 +20,16 @@ public:
 
     void startGame();
 
+    void printGame();
+
 private:
-    int throwDices() const;
+    [[nodiscard]] int throwDices() const;
     void checkConstrains();
-    std::vector<IPlayer> players;
-    std::vector<IPlayer> lostPlayers;
-    void loosePlayer(IPlayer& player){
+    std::vector<std::shared_ptr<IPlayer>> players;
+    std::vector<std::shared_ptr<IPlayer>> lostPlayers;
+    void losePlayer(std::shared_ptr<IPlayer> player){
         players.erase(std::remove(players.begin(), players.end(), player), players.end());
+        lostPlayers.push_back(player);
     }
     std::vector<TYPEOFSQUARE> board;
 

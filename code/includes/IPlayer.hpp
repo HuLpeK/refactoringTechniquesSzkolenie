@@ -23,10 +23,15 @@ public:
     }
 
     int getPosition(){return piece->getPosition();}
+    bool operator==(const IPlayer& lhs){
+        return ID == lhs.ID;
+    }
 
     friend std::ostream& operator<<(std::ostream& out, const IPlayer& player);
 private:
     std::shared_ptr<IPiece> piece;
     int money {};
     const std::string name {};
+
+    int ID;
 };
