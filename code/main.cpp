@@ -1,5 +1,10 @@
 #include<iostream>
 
+#include "includes/Player.hpp"
+
 int main(){
-    std::cout << "Hello World!\n";
+    Player Hubert("Hubert");
+    std::cout << Hubert << '\n';
+    
+
 }
