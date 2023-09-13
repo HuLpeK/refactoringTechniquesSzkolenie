@@ -9,4 +9,4 @@ class IPiece{
         friend std::ostream& operator<<(std::ostream& out, const IPiece& piece);
     private:
         int square;
-}
+};
