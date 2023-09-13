@@ -31,8 +31,7 @@ void MonopolyGame::startGame() {
 void MonopolyGame::processPlayerTurn(int currPlayerIterator) {
     std::shared_ptr<Player> actPlayer = players[currPlayerIterator];
 
-    int dices = throwDices();
-    int startPlayerPosition = actPlayer->getPosition();
+    int dices = rollingDice.throwTwoDices();
 
 
     actPlayer->movePlayer(dices);
@@ -40,7 +39,6 @@ void MonopolyGame::processPlayerTurn(int currPlayerIterator) {
     int finalPosition = actPlayer->getPosition();
 
 
-//    processMoveToFinalPos(actPlayer);
     board[finalPosition].processEvents(actPlayer);
 
 
@@ -70,12 +68,6 @@ void MonopolyGame::checkConstrains() {
         throw std::out_of_range("Amount of players is not sufficient");
     if(players.size() > 8)
         throw std::out_of_range("There is too many players");
-}
-
-int MonopolyGame::throwDices() const {
-    int kostkaPierwsza = std::rand() % 6 + 1;
-    int kostkaDruga = std::rand() % 6 + 1;
-    return kostkaPierwsza + kostkaDruga;
 }
 
 void MonopolyGame::losePlayer(Player::ptr player) {

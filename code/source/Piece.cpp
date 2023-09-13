@@ -10,6 +10,6 @@ void Piece::movePiece(int position){
     square = (square + position)%40; //TODO: magic number
 }
 
-int Piece::getPosition() {
+int Piece::getPosition() const {
     return square;
 }

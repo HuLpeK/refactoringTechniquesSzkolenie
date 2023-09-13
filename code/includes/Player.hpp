@@ -32,5 +32,5 @@ private:
     int money {100};
     const std::string name {};
 
-    ID playerID; //todo: dopisac klase playerID
+    ID playerID; //todo: powtorzenieTypu
 };

@@ -11,6 +11,8 @@ add_executable(program main.cpp
         includes/Events.hpp
         includes/ID.hpp
         source/ID.cpp
+        source/dice.cpp
+        includes/dice.hpp
 )
 
 include_directories(includes)

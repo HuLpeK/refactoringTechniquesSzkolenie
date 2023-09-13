@@ -12,7 +12,6 @@ std::ostream &operator<<(std::ostream &out, const Player &player) {
 
 Player::Player(std::string playerName) : name(std::move(playerName))  {
     piece = std::make_shared<Piece>(STARTINGPOSTION);
-
 }
 
 bool Player::operator==(const Player &lhs) const {
