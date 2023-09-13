@@ -1,7 +1,3 @@
-//
-// Created by kulpaczy on 9/13/23.
-//
-
 #include "MonopolyGame.hpp"
 
 MonopolyGame::MonopolyGame(std::initializer_list<IPlayer> il) {
@@ -11,6 +7,9 @@ MonopolyGame::MonopolyGame(std::initializer_list<IPlayer> il) {
 
         board.resize(40);
         board[0] = TYPEOFSQUARE::START;
+
+        for(int i = 1; i < board.size(); i++)
+            board[i] = TYPEOFSQUARE::PENALTY;
 }
 
 void MonopolyGame::addPlayer(const IPlayer& player) {
@@ -19,6 +18,7 @@ void MonopolyGame::addPlayer(const IPlayer& player) {
 
 void MonopolyGame::startGame() {
     checkConstrains();
+
     for(int currPlayerIterator = 0; (players.size() != 1); currPlayerIterator = (currPlayerIterator + 1) % players.size()) {
         std::shared_ptr<IPlayer> accPlayer = players[currPlayerIterator];
         
@@ -29,7 +29,7 @@ void MonopolyGame::startGame() {
 
         int final_position = (curretnPlayerPosition+dices)%40;
 
-        if(board[final_position] == TYPEOFSQUARE::PENALTY)  accPlayer->receiveMoney(-1);
+        if(board[final_position] == TYPEOFSQUARE::PENALTY)  accPlayer->receiveMoney(-10);
 
         if(board[final_position] == TYPEOFSQUARE::REWARD) accPlayer->receiveMoney(10);
 

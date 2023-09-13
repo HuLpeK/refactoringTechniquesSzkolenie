@@ -30,7 +30,7 @@ public:
     friend std::ostream& operator<<(std::ostream& out, const IPlayer& player);
 private:
     std::shared_ptr<IPiece> piece;
-    int money {};
+    int money {100};
     const std::string name {};
 
     int ID;

@@ -1,4 +1,5 @@
 #pragma once
+
 #include "IPlayer.hpp"
 #include "algorithm"
 #include <vector>
@@ -16,13 +17,11 @@ class MonopolyGame {
 public:
     MonopolyGame(std::initializer_list<IPlayer> il);
 
-    void addPlayer(const IPlayer& player);
-
     void startGame();
 
-    void printGame();
-
 private:
+    void printGame();
+    void addPlayer(const IPlayer& player);
     [[nodiscard]] int throwDices() const;
     void checkConstrains();
     std::vector<std::shared_ptr<IPlayer>> players;
