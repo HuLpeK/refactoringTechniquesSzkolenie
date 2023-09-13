@@ -2,4 +2,11 @@ add_executable(program main.cpp
         includes/IPlayer.hpp
         source/IPlayer.cpp
         source/Player.cpp
-        includes/Player.hpp)
+        includes/Player.hpp
+        includes/IPiece.hpp
+        source/IPiece.cpp
+        source/Piece.cpp
+        includes/Piece.hpp
+        )
+
+include_directories(includes)
