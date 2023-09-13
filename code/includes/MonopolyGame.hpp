@@ -9,7 +9,7 @@
     DEFAULT,
     START,
     REWARD,
-    PENELTY
+    PENALTY
 };
 
 class MonopolyGame {
@@ -25,7 +25,9 @@ private:
     void checkConstrains();
     std::vector<IPlayer> players;
     std::vector<IPlayer> lostPlayers;
-
+    void loosePlayer(IPlayer& player){
+        players.erase(std::remove(players.begin(), players.end(), player), players.end());
+    }
     std::vector<TYPEOFSQUARE> board;
 
 };

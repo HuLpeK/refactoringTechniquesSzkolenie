@@ -22,6 +22,8 @@ public:
         piece->movePiece(pos);
     }
 
+    int getPosition(){return piece->getPosition();}
+
     friend std::ostream& operator<<(std::ostream& out, const IPlayer& player);
 private:
     std::shared_ptr<IPiece> piece;

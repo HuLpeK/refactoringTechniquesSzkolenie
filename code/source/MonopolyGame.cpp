@@ -21,8 +21,20 @@ void MonopolyGame::startGame() {
     checkConstrains();
     for(int currPlayerIterator = 0; (players.size() != 1); currPlayerIterator = (currPlayerIterator + 1) % players.size()) {
         IPlayer accPlayer = players[currPlayerIterator];
+        
         int dices = throwDices();
+        int curretnPlayerPosition = accPlayer.getPosition();
 
+        if(curretnPlayerPosition+dices > 40) accPlayer.receiveMoney(10);
+
+        int final_position = (curretnPlayerPosition+dices)%40;
+
+        if(board[final_position] == TYPEOFSQUARE::PENALTY)  accPlayer.receiveMoney(-10);
+
+        if(board[final_position] == TYPEOFSQUARE::REWARD) accPlayer.receiveMoney(10); 
+
+        if(accPlayer.getMoney() < 0) loosePlayer(accPlayer);
+        
         accPlayer.movePlayer(dices);
 
     }
