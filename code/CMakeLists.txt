@@ -7,6 +7,8 @@ add_executable(program main.cpp
         source/IPiece.cpp
         source/Piece.cpp
         includes/Piece.hpp
-        )
+        source/MonopolyGame.cpp
+        includes/MonopolyGame.hpp
+)
 
 include_directories(includes)

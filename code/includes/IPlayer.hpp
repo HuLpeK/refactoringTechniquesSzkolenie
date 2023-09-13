@@ -5,16 +5,26 @@
 #include <string>
 #include <iostream>
 #include <utility>
+#include <memory>
+#include "IPiece.hpp"
 
-    class IPlayer{
-    public:
-        IPlayer(std::string currName);
-        virtual void receiveMoney(int amountOfMoney);
+#define STARTINGPOSTION 0
 
-        friend std::ostream& operator<<(std::ostream& out, const IPlayer& player);
+class IPlayer{
+public:
+    IPlayer(std::string currName);
+    virtual void receiveMoney(int amountOfMoney);
+    int getMoney(){
+        return money;
+    }
 
-    private:
+    void movePlayer(int pos){
+        piece->movePiece(pos);
+    }
 
-        int money {};
-        const std::string name {};
-    };
+    friend std::ostream& operator<<(std::ostream& out, const IPlayer& player);
+private:
+    std::shared_ptr<IPiece> piece;
+    int money {};
+    const std::string name {};
+};
