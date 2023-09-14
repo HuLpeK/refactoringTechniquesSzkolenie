@@ -7,10 +7,10 @@ MonopolyGame::MonopolyGame(std::initializer_list<std::string> il) {
 
         board.resize(40);
 
-        board[0].addEvent(std::make_shared<Events::Start>());
+        board[0].addEvent(std::make_shared<Actions::Start>());
 
         for(int i = 1; i < 40; i++)
-            board[i].addEvent(std::make_shared<Events::Penelty>());
+            board[i].addEvent(std::make_shared<Actions::Penelty>());
 
 }
 

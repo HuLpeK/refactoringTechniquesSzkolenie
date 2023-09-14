@@ -1,7 +1,7 @@
 #include <utility>
 
 #include "../includes/Player.hpp"
-#include "Events.hpp"
+#include "Actions.hpp"
 
 
 void Player::receiveMoney(int amountOfMoney) { //TODO zastanowic sie co jesli money < 0

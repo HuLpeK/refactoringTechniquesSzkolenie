@@ -1,25 +1,25 @@
 #pragma once
 
-#include "IEvent.hpp"
+#include "IAction.hpp"
 
-namespace Events{
+namespace Actions{
 
-    class Penelty : public IEvent{
+    class Penelty : public IAction{
          void processPlayer(Player::ptr player) override{
              player->receiveMoney(-10);
          }
     };
 
-    class Reward : public IEvent{
+    class Reward : public IAction{
         void processPlayer(Player::ptr player) override{
             player->receiveMoney(10);
         }
     };
 
-    class Start : public IEvent{
+    class Start : public IAction{
         void processPlayer(Player::ptr player) override{
-            player->receiveMoney(100);
+            player->receiveMoney(10);
         }
     };
 
-} // namespace Events
+} // namespace Actions

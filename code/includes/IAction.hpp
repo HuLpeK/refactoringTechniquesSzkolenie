@@ -3,7 +3,7 @@
 
 #include <memory>
 
-class IEvent{
+class IAction{
 public:
     virtual void processPlayer(std::shared_ptr<class Player>)=0;
 };

@@ -7,8 +7,8 @@ add_executable(program main.cpp
         includes/MonopolyGame.hpp
         source/Square.cpp
         includes/Square.hpp
-        includes/IEvent.hpp
-        includes/Events.hpp
+        includes/IAction.hpp
+        includes/Actions.hpp
         includes/ID.hpp
         source/ID.cpp
         source/dice.cpp
