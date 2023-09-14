@@ -12,8 +12,7 @@ class Board{
             squares[start_square].addEvent(std::make_shared<Actions::Start>());
         }
 
-        void performOnStep(std::shared_ptr<class Player> player);
-
+        Square& at(int position);
 
     private:
         const int number_of_squares;

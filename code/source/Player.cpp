@@ -38,7 +38,7 @@ void Player::performMove(int diceRolled) {
     move(diceRolled);
 
     handleMovingThroughStart(startingPosition);
-    board[getPosition()].processEvents(shared_from_this());
+    board.at(getPosition()).processEvents(shared_from_this());
 
     if(isPlayerBankrupt())
         throw std::out_of_range("I'm Bankrupt!");

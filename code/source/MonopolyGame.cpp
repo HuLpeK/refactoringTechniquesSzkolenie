@@ -1,16 +1,15 @@
 #include "MonopolyGame.hpp"
 
-MonopolyGame::MonopolyGame(std::initializer_list<std::string> il) {
+MonopolyGame::MonopolyGame(std::initializer_list<std::string> il) : board(40){
         players.reserve(8);
         for(const auto& it: il)
             addPlayer(it);
 
-        board.resize(40);
 
-        board[0].addEvent(std::make_shared<Actions::Start>());
+        board.at(0).addEvent(std::make_shared<Actions::Start>());
 
         for(int i = 1; i < 40; i++)
-            board[i].addEvent(std::make_shared<Actions::Penelty>());
+            board.at(i).addEvent(std::make_shared<Actions::Penelty>());
 
 }
 

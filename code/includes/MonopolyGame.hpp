@@ -4,6 +4,7 @@
 #include "Actions.hpp"
 #include "Square.hpp"
 #include "dice.hpp"
+#include "Board.hpp"
 #include <algorithm>
 #include <vector>
 
@@ -25,7 +26,7 @@ private:
     dice rollingDice {};
     playerList players {};
     playerList lostPlayers {};
-    std::vector<Square> board {};
+    Board board;
 
 };
 
