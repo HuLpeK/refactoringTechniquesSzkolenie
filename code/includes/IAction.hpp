@@ -3,7 +3,8 @@
 
 #include <memory>
 
-class IAction{
+class IActionOnStep{
 public:
     virtual void processPlayer(std::shared_ptr<class Player>)=0;
 };
+

@@ -2,12 +2,12 @@
 
 #include "Square.hpp"
 
-Square::Square(std::initializer_list<std::shared_ptr<IAction>> il) {
+Square::Square(std::initializer_list<std::shared_ptr<IActionOnStep>> il) {
     for(auto& it: il)
         addEvent(it);
 }
 
-void Square::addEvent(std::shared_ptr<IAction> newEvent) {
+void Square::addEvent(std::shared_ptr<IActionOnStep> newEvent) {
     eventList.push_back(std::move(newEvent));
 }
 
