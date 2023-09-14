@@ -2,12 +2,12 @@
 
 
 Square& BoardIterator::next(){
-    currentIndex = (currentIndex+1)%board.getSize();
+    currentIndex = (currentIndex+1)%board->getSize();
 
-    return board.at(currentIndex);
+    return board->at(currentIndex);
 }
 
 Square& BoardIterator::get(){
-    return board.at(currentIndex);
+    return board->at(currentIndex);
 }
 

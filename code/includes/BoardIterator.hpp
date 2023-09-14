@@ -1,13 +1,15 @@
 #pragma once
 
+#include <utility>
+
 #include "Board.hpp"
 
 class BoardIterator{
     public:
-        BoardIterator(Board& b) : board(b){}
+        BoardIterator(std::shared_ptr<Board> b) : board(std::move(b)){}
         Square& next();
         Square& get();
     private:
-        Board& board;
+        std::shared_ptr<Board> board;
         int currentIndex = 0;
 };

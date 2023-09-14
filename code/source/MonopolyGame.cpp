@@ -1,4 +1,5 @@
 #include "MonopolyGame.hpp"
+#include "Actions.hpp"
 
 MonopolyGame::MonopolyGame(std::initializer_list<std::string> il) : board(std::make_shared<Board>(40)){
         players.reserve(8);
@@ -6,7 +7,7 @@ MonopolyGame::MonopolyGame(std::initializer_list<std::string> il) : board(std::m
             addPlayer(it);
 
 
-    board->at(0).addActionOnStep(std::make_shared<Actions::Start>());
+    board->at(0).addActionOnPassby(std::make_shared<Actions::Start>());
 
         for(int i = 1; i < 40; i++)
             board->at(i).addActionOnStep(std::make_shared<Actions::Penelty>());
@@ -14,7 +15,7 @@ MonopolyGame::MonopolyGame(std::initializer_list<std::string> il) : board(std::m
 }
 
 void MonopolyGame::addPlayer(const std::string &playerName) {
-    players.push_back(std::make_shared<Player>(playerName, BoardIterator(*board)));
+    players.push_back(std::make_shared<Player>(playerName, board));
 }
 
 void MonopolyGame::startGame() {

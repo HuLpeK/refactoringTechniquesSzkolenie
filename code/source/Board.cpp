@@ -1,5 +1,6 @@
 #include "../includes/Board.hpp"
 
+#include "Actions.hpp"
 
 Square& Board::at(int position){
     return squares[position];
