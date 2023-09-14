@@ -13,6 +13,8 @@ add_executable(program main.cpp
         source/ID.cpp
         source/dice.cpp
         includes/dice.hpp
+        source/Board.cpp
+        includes/Board.hpp
 )
 
 include_directories(includes)

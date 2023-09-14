@@ -2,6 +2,7 @@
 
 #include "../includes/Player.hpp"
 #include "Actions.hpp"
+#include "../includes/Board.hpp"
 
 
 void Player::receiveMoney(int amountOfMoney) { //TODO zastanowic sie co jesli money < 0
@@ -13,7 +14,7 @@ std::ostream &operator<<(std::ostream &out, const Player &player) {
     return out;
 }
 
-Player::Player(std::string playerName, std::vector<Square>& bo) : name(std::move(playerName)), board(bo)  {
+Player::Player(std::string playerName, std::shared_ptr<Board> bo) : name(std::move(playerName)), board(std::move(bo)) {
     piece = std::make_shared<Piece>(STARTINGPOSTION);
 }
 
@@ -38,7 +39,7 @@ void Player::performMove(int diceRolled) {
     move(diceRolled);
 
     handleMovingThroughStart(startingPosition);
-    board.at(getPosition()).processEvents(shared_from_this());
+    board->at(getPosition()).processActionsOnStep(shared_from_this());
 
     if(isPlayerBankrupt())
         throw std::out_of_range("I'm Bankrupt!");
@@ -52,5 +53,5 @@ void Player::handleMovingThroughStart(int startingPosition) {
     if(startingPosition <= getPosition() or getPosition() == 0)
         return;
 
-    board[STARTINGPOSTION].processEvents(shared_from_this());
+    board->at(STARTINGPOSTION).processActionsOnStep(shared_from_this());
 }

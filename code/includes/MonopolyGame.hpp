@@ -26,7 +26,7 @@ private:
     dice rollingDice {};
     playerList players {};
     playerList lostPlayers {};
-    Board board;
+    std::shared_ptr<Board> board ;
 
 };
 

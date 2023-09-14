@@ -5,7 +5,7 @@
 #include "Square.hpp"
 #include "Piece.hpp"
 #include "ID.hpp"
-#include "Board.hpp"
+
 #include <string>
 #include <iostream>
 #include <utility>
@@ -16,7 +16,7 @@
 
 class Player : public std::enable_shared_from_this<Player>{
 public:
-    Player(std::string playerName, Board& bo);
+    Player(std::string playerName, std::shared_ptr<class Board> bo);
 
     void performMove(int diceRolled);
 
@@ -35,7 +35,7 @@ private:
     int getPosition();
 
     bool isPlayerBankrupt() const;
-    Board& board;
+    std::shared_ptr<class Board> board;
 
     std::shared_ptr<Piece> piece;
     int money {100};
