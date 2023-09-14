@@ -14,7 +14,7 @@ std::ostream &operator<<(std::ostream &out, const Player &player) {
     return out;
 }
 
-Player::Player(std::string playerName, std::shared_ptr<Board> bo) : name(std::move(playerName)), board(std::move(bo)) {
+Player::Player(std::string playerName, BoardIterator& bi) : name(std::move(playerName)), boardIterator(bi) {
     piece = std::make_shared<Piece>(STARTINGPOSTION);
 }
 
@@ -25,10 +25,9 @@ bool Player::operator==(const Player &lhs) const {
 void Player::move(int pos) { // todo zastanowic sie czy dwa razy sie nie
 
     for(int i = 0; i < pos - 1; i++, moveForwardByOne())
-        board->at(getPosition()).processActionOnPassby(shared_from_this());
-
-    moveForwardByOne();
-    board->at(getPosition()).processActionsOnStep(shared_from_this());
+        boardIterator.next().processActionOnPassby(shared_from_this());
+    
+    boardIterator.get().processActionsOnStep(shared_from_this());
 }
 
 int Player::getMoney() const{
@@ -61,6 +60,3 @@ void Player::handleMovingThroughStart(int startingPosition) {
     board->at(STARTINGPOSTION).processActionsOnStep(shared_from_this());
 }
 
-void Player::moveForwardByOne() {
-    piece->movePiece(1);
-}

@@ -15,6 +15,8 @@ add_executable(program main.cpp
         includes/dice.hpp
         source/Board.cpp
         includes/Board.hpp
+        source/BoardIterator.cpp
+        includes/BoardIterator.hpp
 )
 
 include_directories(includes)

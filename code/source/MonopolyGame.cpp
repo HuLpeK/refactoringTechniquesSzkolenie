@@ -14,7 +14,7 @@ MonopolyGame::MonopolyGame(std::initializer_list<std::string> il) : board(std::m
 }
 
 void MonopolyGame::addPlayer(const std::string &playerName) {
-    players.push_back(std::make_shared<Player>(playerName, board));
+    players.push_back(std::make_shared<Player>(playerName, BoardIterator(*board)));
 }
 
 void MonopolyGame::startGame() {

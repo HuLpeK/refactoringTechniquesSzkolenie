@@ -5,6 +5,7 @@
 #include "Square.hpp"
 #include "dice.hpp"
 #include "Board.hpp"
+#include "BoardIterator.hpp"
 #include <algorithm>
 #include <vector>
 

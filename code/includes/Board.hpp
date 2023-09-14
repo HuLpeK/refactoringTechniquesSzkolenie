@@ -11,6 +11,7 @@ class Board{
 
         Square& at(int position);
 
+        int getSize();
     private:
         const int number_of_squares;
         const int start_square;
