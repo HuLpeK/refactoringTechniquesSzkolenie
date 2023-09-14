@@ -21,7 +21,7 @@ bool Player::operator==(const Player &lhs) const {
     return playerID == lhs.playerID;
 }
 
-void Player::movePlayer(int pos) {
+void Player::move(int pos) {
         piece->movePiece(pos);
 }
 
@@ -35,7 +35,7 @@ int Player::getPosition() {
 
 void Player::performMove(int diceRolled) {
     const int startingPosition = getPosition();
-    movePlayer(diceRolled);
+    move(diceRolled);
 
     handleMovingThroughStart(startingPosition);
     board[getPosition()].processEvents(shared_from_this());
@@ -49,9 +49,8 @@ bool Player::isPlayerBankrupt() const {
 }
 
 void Player::handleMovingThroughStart(int startingPosition) {
-    if(startingPosition <= getPosition() and getPosition() != 0)
+    if(startingPosition <= getPosition() or getPosition() == 0)
         return;
 
     board[STARTINGPOSTION].processEvents(shared_from_this());
-
 }

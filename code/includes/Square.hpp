@@ -5,6 +5,7 @@
 class Square {
 public:
     Square()=default;
+    virtual ~Square() {}
     Square(std::initializer_list<std::shared_ptr<IEvent>> il);
 
     void addEvent(std::shared_ptr<IEvent> newEvent);

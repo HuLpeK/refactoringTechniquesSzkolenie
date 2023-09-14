@@ -29,7 +29,7 @@ public:
 private:
     [[nodiscard]] int getMoney() const;
     void handleMovingThroughStart(int startingPosition);
-    void movePlayer(int pos);
+    void move(int pos);
 
     int getPosition();
 
