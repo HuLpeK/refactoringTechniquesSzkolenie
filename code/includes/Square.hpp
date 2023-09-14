@@ -9,11 +9,14 @@ public:
     Square(std::initializer_list<std::shared_ptr<IActionOnStep>> il);
 
     void addActionOnStep(std::shared_ptr<IActionOnStep> newEvent);
+    void addActionOnPassby(std::shared_ptr<IActionOnPassby> newEvent);
+    void addActionOnPassby(std::shared_ptr<IActionOnboth> newEvent);
 
     void processActionsOnStep(std::shared_ptr<class Player> player);
-//    void processActionOnPassby(std::shared_ptr<class Player> player);
+    void processActionOnPassby(std::shared_ptr<class Player> player);
 private:
 
     std::list<std::shared_ptr<IActionOnStep>> actionListOnStop;
-//    std::list<std::shared_ptr<IActionOnPassby>> actionListOnPassby;
+    std::list<std::shared_ptr<IActionOnPassby>> actionListOnPassby;
+    std::list<std::shared_ptr<IActionOnboth>> actionListOnBoth;
 };

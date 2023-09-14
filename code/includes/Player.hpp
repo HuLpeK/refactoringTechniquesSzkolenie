@@ -27,11 +27,11 @@ public:
     friend std::ostream& operator<<(std::ostream& out, const Player& player);
 
     using ptr = std::shared_ptr<Player>;
-private:
     [[nodiscard]] int getMoney() const;
+private:
     void handleMovingThroughStart(int startingPosition);
     void move(int pos);
-
+    void moveForwardByOne();
     int getPosition();
 
     bool isPlayerBankrupt() const;

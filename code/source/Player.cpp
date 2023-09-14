@@ -22,8 +22,13 @@ bool Player::operator==(const Player &lhs) const {
     return playerID == lhs.playerID;
 }
 
-void Player::move(int pos) {
-        piece->movePiece(pos);
+void Player::move(int pos) { // todo zastanowic sie czy dwa razy sie nie
+
+    for(int i = 0; i < pos - 1; i++, moveForwardByOne())
+        board->at(getPosition()).processActionOnPassby(shared_from_this());
+
+    moveForwardByOne();
+    board->at(getPosition()).processActionsOnStep(shared_from_this());
 }
 
 int Player::getMoney() const{
@@ -38,8 +43,8 @@ void Player::performMove(int diceRolled) {
     const int startingPosition = getPosition();
     move(diceRolled);
 
-    handleMovingThroughStart(startingPosition);
-    board->at(getPosition()).processActionsOnStep(shared_from_this());
+//    handleMovingThroughStart(startingPosition)
+//    board->at(getPosition()).processActionsOnStep(shared_from_this());
 
     if(isPlayerBankrupt())
         throw std::out_of_range("I'm Bankrupt!");
@@ -54,4 +59,8 @@ void Player::handleMovingThroughStart(int startingPosition) {
         return;
 
     board->at(STARTINGPOSTION).processActionsOnStep(shared_from_this());
+}
+
+void Player::moveForwardByOne() {
+    piece->movePiece(1);
 }

@@ -11,7 +11,25 @@ void Square::addActionOnStep(std::shared_ptr<IActionOnStep> newEvent) {
     actionListOnStop.push_back(std::move(newEvent));
 }
 
+void Square::addActionOnPassby(std::shared_ptr<IActionOnPassby> newEvent) {
+    actionListOnPassby.push_back(std::move(newEvent));
+}
+
+void Square::addActionOnPassby(std::shared_ptr<IActionOnboth> newEvent) {
+    actionListOnBoth.push_back(std::move(newEvent));
+}
+
 void Square::processActionsOnStep(std::shared_ptr<class Player> player) {
     for(const auto& it : actionListOnStop)
-        it->processPlayer(player);
+        it->processPlayerOnStep(player);
+
+    for(const auto& it: actionListOnBoth)
+        it->processPlayerOnStep(player);
+}
+
+void Square::processActionOnPassby(std::shared_ptr<struct Player> player) {
+    for(const auto& it : actionListOnPassby)
+        it->processPlayerOnPassby(player);
+    for(const auto& it: actionListOnBoth)
+        it->processPlayerOnPassby(player);
 }
