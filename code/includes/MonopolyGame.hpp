@@ -3,7 +3,7 @@
 #include "IPlayer.hpp"
 #include "Actions.hpp"
 #include "Square.hpp"
-#include "dice.hpp"
+#include "Dice.hpp"
 #include "Board.hpp"
 #include "BoardIterator.hpp"
 #include <algorithm>
@@ -27,7 +27,7 @@ private:
     void processPlayerTurn(int currPlayerIterator);
     void losePlayer(IPlayer::ptr player);
 
-    dice rollingDice {};
+    Dice rollingDice {};
     playerList players {};
     playerList lostPlayers {};
     std::shared_ptr<Board> board ;

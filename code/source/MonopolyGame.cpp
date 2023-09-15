@@ -6,20 +6,16 @@ MonopolyGame::MonopolyGame(std::initializer_list<std::string> il) : board(std::m
     for(const auto& it: il)
         addPlayer<GreedyAI>(it);
 
-    addPlayer<HumanPlayer>("Moj gracz");
+//    addPlayer<HumanPlayer>("Moj gracz");
     addPlayer<RandomAI>("Random player");
 
     board->at(0).addActionOnPassby(std::make_shared<Actions::Start>());
     board->at(1).addActionOnBoth(std::make_shared<Actions::Deposit>());
     board->at(2).addActionOnStep(std::make_shared<Actions::Property>());
-    for(int i = 3; i < 40; i++)
+    for(int i = 3; i < board->getSize(); i++)
         board->at(i).addActionOnStep(std::make_shared<Actions::Property>());
 
 }
-
-//void MonopolyGame::addPlayer(const std::string &playerName) {
-//    players.push_back(std::make_shared<GreedyAI>(playerName, board));
-//}
 
 void MonopolyGame::startGame() {
     checkConstrains();

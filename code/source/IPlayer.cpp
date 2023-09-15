@@ -17,9 +17,7 @@ std::ostream &operator<<(std::ostream &out, const IPlayer &player) {
     return out;
 }
 
-IPlayer::IPlayer(std::string playerName, std::shared_ptr<Board> bo) : name(std::move(playerName)), boardIterator(std::make_shared<BoardIterator>(bo)) { // TODO: dodac iterator
-    piece = std::make_shared<Piece>(STARTINGPOSITION);
-
+IPlayer::IPlayer(std::string playerName, std::shared_ptr<Board> bo) : name(std::move(playerName)), piece(std::make_shared<Piece>(STARTINGPOSITION)), boardIterator(std::make_shared<BoardIterator>(bo, piece)) { // TODO: dodac iterator
 }
 
 bool IPlayer::operator==(const IPlayer &lhs) const {
@@ -58,3 +56,23 @@ void IPlayer::moveForwardByOne() {
     boardIterator->next();
 }
 
+bool GreedyAI::decideToBuy() {
+    return true;
+}
+
+bool HumanPlayer::decideToBuy() {
+    std::cout<< *this << "\n";
+
+    std::cout<<"Czy chcesz kupic nieruchomosc na swojej pozycji? [Y/N]" << std::endl;
+
+    char decision;
+    std::cin>>decision;
+
+    return decision == 'Y';
+
+}
+
+bool RandomAI::decideToBuy() {
+    return rollingDice.throwTwoDices()%2;
+
+}

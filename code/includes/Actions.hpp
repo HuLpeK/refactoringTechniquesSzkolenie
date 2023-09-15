@@ -57,8 +57,12 @@ namespace Actions{
 
 
         private:
-            bool isOccupied(){return ownerPlayer != nullptr;}
-            bool isOwner(std::shared_ptr<class IPlayer> player){return ownerPlayer == player;}
+            bool isOccupied(){
+                return ownerPlayer != nullptr;
+            }
+            bool isOwner(std::shared_ptr<class IPlayer> player){
+                return ownerPlayer == player;
+            }
             void processOfBuyingProperty(std::shared_ptr<class IPlayer> player){
                 bool isGoingToBuy = player->decideToBuy();
                 if(isGoingToBuy){
@@ -76,10 +80,9 @@ namespace Actions{
                 
                 ownerPlayer->receiveMoney(moneyToReceive);
             }
+
             const int buyPrice = 10;
             const int rentPrice = 5;
             std::shared_ptr<class IPlayer> ownerPlayer{nullptr};
     };
-    
-
 } // namespace Actions

@@ -8,7 +8,7 @@ class BoardIterator;
 class Piece;
 
 #include "ID.hpp"
-#include "dice.hpp"
+#include "Dice.hpp"
 
 #include <string>
 #include <iostream>
@@ -17,6 +17,7 @@ class Piece;
 #include <vector>
 
 #define STARTINGPOSITION 0
+#define STARTINGMONEY 100
 
 class IPlayer : public std::enable_shared_from_this<IPlayer>{
 public:
@@ -42,10 +43,9 @@ private:
 
     bool isPlayerBankrupt() const;
     std::shared_ptr<Board> board;
-    std::shared_ptr<BoardIterator> boardIterator;
-
     std::shared_ptr<Piece> piece;
-    int money {100};
+    std::shared_ptr<BoardIterator> boardIterator;
+    int money {STARTINGMONEY};
     const std::string name {};
     ID playerID; //todo: powtorzenieTypu
 };
@@ -53,33 +53,20 @@ private:
 class GreedyAI : public IPlayer{
 public:
     GreedyAI(std::string playerName, std::shared_ptr<Board> bi) : IPlayer(playerName, bi) {}
-    bool decideToBuy() override{
-        return true;
-    }
+    bool decideToBuy() override;
 };
 
 class HumanPlayer : public IPlayer{
     public:
         HumanPlayer(std::string playerName, std::shared_ptr<Board> bi) : IPlayer(playerName, bi) {}
-        bool decideToBuy() override{
-            std::cout<< *this << "\n";
-
-            std::cout<<"Czy chcesz kupic nieruchomosc na swojej pozycji? [Y/N]" << std::endl;
-
-            char decision;
-            std::cin>>decision;
-
-            return decision == 'Y';
-        }
+        bool decideToBuy() override;
 };
 
 class RandomAI : public IPlayer{
     public:
         RandomAI(std::string playerName, std::shared_ptr<Board> bi) : IPlayer(playerName, bi) {}
          
-        bool decideToBuy() override{
-            return rollingDice.throwTwoDices()%2;
-        }
+        bool decideToBuy() override;
     private:
-        dice rollingDice;
+        Dice rollingDice;
 };

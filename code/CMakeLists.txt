@@ -11,8 +11,8 @@ add_executable(program main.cpp
         includes/Actions.hpp
         includes/ID.hpp
         source/ID.cpp
-        source/dice.cpp
-        includes/dice.hpp
+        source/Dice.cpp
+        includes/Dice.hpp
         source/Board.cpp
         includes/Board.hpp
         source/BoardIterator.cpp
