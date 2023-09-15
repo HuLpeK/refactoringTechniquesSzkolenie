@@ -85,4 +85,53 @@ namespace Actions{
             const int rentPrice = 5;
             std::shared_ptr<class IPlayer> ownerPlayer{nullptr};
     };
+
+    class Prison : public IActionOnStep{
+    public:
+        void processPlayerOnStep(std::shared_ptr<class IPlayer> player) override{
+            player->addWaitTime(3);
+        }
+    };
+
+
+    class RandomStepper : public IActionOnStep
+    {
+    public:
+//        RandomStepper()=default;
+        RandomStepper(std::shared_ptr<IActionOnStep> stAction, std::shared_ptr<IActionOnStep> ndAction, std::shared_ptr<IActionOnStep> rdAction){
+            actions.reserve(3);
+            actions.push_back(std::move(stAction));
+            actions.push_back(std::move(ndAction));
+            actions.push_back(std::move(rdAction));
+        }
+        void processPlayerOnStep(std::shared_ptr<class IPlayer> player) override{
+            int randomNumber = rollingDice.throwTwoDices() % actions.size();
+            actions.at(randomNumber)->processPlayerOnStep(player);
+        }
+
+        private:
+        std::vector<std::shared_ptr<IActionOnStep>> actions {};
+        Dice rollingDice;
+    };
+
+//    class BlackHole : public IActionOnboth{
+//        void processPlayerOnStep(std::shared_ptr<class IPlayer> player) override{
+//            processPlayerOnPassby(player);
+//        }
+//        void processPlayerOnPassby(std::shared_ptr<class IPlayer> player) override{
+//            numOfTurnes++;
+//            if(numOfTurnes%2){
+//
+//            }
+//        }
+//
+//    private:
+//        std::unique_ptr<IActionOnStep> actionOnStep;
+//        std::unique_ptr<IActionOnPassBy> actionOnPassby;
+//        std::unique_ptr<IActionOnBoth> actionOnBoth;
+//        int numOfTurnes {};
+//
+//        };
+
+
 } // namespace Actions

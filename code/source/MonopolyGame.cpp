@@ -12,6 +12,11 @@ MonopolyGame::MonopolyGame(std::initializer_list<std::string> il) : board(std::m
     board->at(0).addActionOnPassby(std::make_shared<Actions::Start>());
     board->at(1).addActionOnBoth(std::make_shared<Actions::Deposit>());
     board->at(2).addActionOnStep(std::make_shared<Actions::Property>());
+    board->at(3).addActionOnStep(std::make_shared<Actions::Prison>());
+    board->at(3).addBlackHole();
+
+    auto x = std::make_shared<Actions::RandomStepper>(std::make_shared<Actions::Prison>(), std::make_shared<Actions::Deposit>(), std::make_shared<Actions::Property>());
+    board->at(4).addActionOnStep(x);
     for(int i = 3; i < board->getSize(); i++)
         board->at(i).addActionOnStep(std::make_shared<Actions::Property>());
 

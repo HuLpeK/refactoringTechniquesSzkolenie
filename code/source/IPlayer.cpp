@@ -41,6 +41,10 @@ int IPlayer::getPosition() {
 }
 
 void IPlayer::performMove(int diceRolled) {
+    if(waitTime != 0){
+        waitTime--;
+        return;
+    }
     const int startingPosition = getPosition();
     move(diceRolled);
 
@@ -54,6 +58,10 @@ bool IPlayer::isPlayerBankrupt() const {
 
 void IPlayer::moveForwardByOne() {
     boardIterator->next();
+}
+
+void IPlayer::addWaitTime(int numOfTurnes) {
+    waitTime += numOfTurnes;
 }
 
 bool GreedyAI::decideToBuy() {

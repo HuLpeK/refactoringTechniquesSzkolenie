@@ -28,6 +28,8 @@ public:
 
     [[nodiscard]] int getMoney() const;
 
+    void addWaitTime(int numOfTurnes);
+
     void receiveMoney(int amountOfMoney);
 
     virtual bool decideToBuy()=0;
@@ -40,6 +42,8 @@ private:
     void move(int pos);
     void moveForwardByOne();
     int getPosition();
+
+    int waitTime {};
 
     bool isPlayerBankrupt() const;
     std::shared_ptr<Board> board;
