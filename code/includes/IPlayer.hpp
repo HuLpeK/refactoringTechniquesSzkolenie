@@ -56,3 +56,18 @@ public:
         return true;
     }
 };
+
+class HumanPlayer : public IPlayer{
+    public:
+        HumanPlayer(std::string playerName, std::shared_ptr<Board> bi) : IPlayer(playerName, bi) {}
+        bool decideToBuy() override{
+            std::cout<< *this << "\n";
+
+            std::cout<<"Czy chcesz kupic nieruchomosc na swojej pozycji? [Y/N]" << std::endl;
+
+            char decision;
+            std::cin>>decision;
+
+            return decision == 'Y';
+        }
+};

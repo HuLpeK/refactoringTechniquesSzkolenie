@@ -4,7 +4,7 @@
 MonopolyGame::MonopolyGame(std::initializer_list<std::string> il) : board(std::make_shared<Board>(40)){
         players.reserve(8);
         for(const auto& it: il)
-            addPlayer<GreedyAI>(it);
+            addPlayer<HumanPlayer>(it);
 
     board->at(0).addActionOnPassby(std::make_shared<Actions::Start>());
     board->at(1).addActionOnBoth(std::make_shared<Actions::Deposit>());
