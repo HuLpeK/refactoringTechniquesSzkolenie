@@ -20,6 +20,7 @@ class Piece;
 class IPlayer : public std::enable_shared_from_this<IPlayer>{
 public:
     IPlayer(std::string playerName, std::shared_ptr<Board> bi);
+    virtual ~IPlayer()=default;
 
     void performMove(int diceRolled);
 
@@ -27,7 +28,7 @@ public:
 
     void receiveMoney(int amountOfMoney);
 
-    bool decideToBuy();
+    virtual bool decideToBuy()=0;
 
     bool operator==(const IPlayer& lhs) const;
 
@@ -46,4 +47,12 @@ private:
     int money {100};
     const std::string name {};
     ID playerID; //todo: powtorzenieTypu
+};
+
+class GreedyAI : public IPlayer{
+public:
+    GreedyAI(std::string playerName, std::shared_ptr<Board> bi) : IPlayer(playerName, bi) {}
+    bool decideToBuy() override{
+        return true;
+    }
 };

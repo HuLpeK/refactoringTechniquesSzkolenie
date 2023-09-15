@@ -4,8 +4,7 @@
 MonopolyGame::MonopolyGame(std::initializer_list<std::string> il) : board(std::make_shared<Board>(40)){
         players.reserve(8);
         for(const auto& it: il)
-            addPlayer(it);
-
+            addPlayer<GreedyAI>(it);
 
     board->at(0).addActionOnPassby(std::make_shared<Actions::Start>());
     board->at(1).addActionOnBoth(std::make_shared<Actions::Deposit>());
@@ -15,9 +14,9 @@ MonopolyGame::MonopolyGame(std::initializer_list<std::string> il) : board(std::m
 
 }
 
-void MonopolyGame::addPlayer(const std::string &playerName) {
-    players.push_back(std::make_shared<IPlayer>(playerName, board));
-}
+//void MonopolyGame::addPlayer(const std::string &playerName) {
+//    players.push_back(std::make_shared<GreedyAI>(playerName, board));
+//}
 
 void MonopolyGame::startGame() {
     checkConstrains();

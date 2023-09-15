@@ -22,10 +22,6 @@ IPlayer::IPlayer(std::string playerName, std::shared_ptr<Board> bo) : name(std::
 
 }
 
-bool IPlayer::decideToBuy(){
-    return true;
-}
-
 bool IPlayer::operator==(const IPlayer &lhs) const {
     return playerID == lhs.playerID;
 }

@@ -19,7 +19,10 @@ public:
 
 private:
     void printGame();
-    void addPlayer(const std::string &playerName);
+    template<typename T>
+    void addPlayer(const std::string &playerName){
+        players.push_back(std::make_shared<T>(playerName, board));
+    }
     void checkConstrains();
     void processPlayerTurn(int currPlayerIterator);
     void losePlayer(IPlayer::ptr player);
