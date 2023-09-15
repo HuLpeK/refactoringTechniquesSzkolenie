@@ -48,13 +48,7 @@ namespace Actions{
                     return;
 
                 if(isOccupied()){
-
-                    int moneyToReceive = std::min(player->getMoney(), rentPrice);
-                    
-                    player->receiveMoney(-1 * rentPrice);
-                    
-                    ownerPlayer->receiveMoney(moneyToReceive);
-
+                    payRentToOwner(player);
                     return;
                 }
 
@@ -74,6 +68,13 @@ namespace Actions{
                     ownerPlayer = player;
                     player->receiveMoney(-buyPrice);
                 }
+            }
+            void payRentToOwner(std::shared_ptr<class IPlayer> player){
+                int moneyToReceive = std::min(player->getMoney(), rentPrice);
+                    
+                player->receiveMoney(-1 * rentPrice);
+                
+                ownerPlayer->receiveMoney(moneyToReceive);
             }
             const int buyPrice = 10;
             const int rentPrice = 5;

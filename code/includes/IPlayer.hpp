@@ -8,6 +8,7 @@ class BoardIterator;
 class Piece;
 
 #include "ID.hpp"
+#include "dice.hpp"
 
 #include <string>
 #include <iostream>
@@ -70,4 +71,15 @@ class HumanPlayer : public IPlayer{
 
             return decision == 'Y';
         }
+};
+
+class RandomAI : public IPlayer{
+    public:
+        RandomAI(std::string playerName, std::shared_ptr<Board> bi) : IPlayer(playerName, bi) {}
+         
+        bool decideToBuy() override{
+            return rollingDice.throwTwoDices()%2;
+        }
+    private:
+        dice rollingDice;
 };
