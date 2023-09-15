@@ -25,6 +25,8 @@ public:
 
     void receiveMoney(int amountOfMoney);
 
+    bool decideToBuy();
+    
     bool operator==(const Player& lhs) const;
 
     friend std::ostream& operator<<(std::ostream& out, const Player& player);

@@ -40,4 +40,41 @@ namespace Actions{
         int depositAmount = 0;
     };
 
+    class Property : public IActionOnStep{
+        public:
+            void processPlayerOnStep(std::shared_ptr<class Player> player) override{
+                if(isOccupied() and not isOwner(player)){
+
+                    int moneyToReceive = std::min(player->getMoney(), rentPrice);
+                    
+                    player->receiveMoney(-rentPrice);
+                    
+                    ownerPlayer->receiveMoney(moneyToReceive);
+
+                    return;
+                }
+
+               processOfBuyingProperty(player);
+            }
+
+
+        private:
+            bool isOccupied(){return ownerPlayer == nullptr;}
+            bool isOwner(std::shared_ptr<class Player> player){return ownerPlayer == player;}
+            void processOfBuyingProperty(std::shared_ptr<class Player> player){
+                bool isGoingToBuy = player->decideToBuy();
+                if(isGoingToBuy){
+                    if(player->getMoney() < buyPrice) 
+                        throw std::out_of_range("You don't have enough money");
+                    
+                    ownerPlayer = player;
+                    player->receiveMoney(-buyPrice);
+                }
+            }
+            const int buyPrice = 10;
+            const int rentPrice = 5;
+            std::shared_ptr<class Player> ownerPlayer{nullptr};
+    };
+    
+
 } // namespace Actions

@@ -22,6 +22,10 @@ Player::Player(std::string playerName, std::shared_ptr<Board> bo) : name(std::mo
 
 }
 
+bool Player::decideToBuy(){
+    return true;
+}
+
 bool Player::operator==(const Player &lhs) const {
     return playerID == lhs.playerID;
 }

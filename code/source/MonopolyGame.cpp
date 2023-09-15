@@ -9,7 +9,8 @@ MonopolyGame::MonopolyGame(std::initializer_list<std::string> il) : board(std::m
 
     board->at(0).addActionOnPassby(std::make_shared<Actions::Start>());
     board->at(1).addActionOnBoth(std::make_shared<Actions::Deposit>());
-    for(int i = 2; i < 40; i++)
+    board->at(2).addActionOnStep(std::make_shared<Actions::Property>());
+    for(int i = 3; i < 40; i++)
         board->at(i).addActionOnStep(std::make_shared<Actions::Penelty>());
 
 }
