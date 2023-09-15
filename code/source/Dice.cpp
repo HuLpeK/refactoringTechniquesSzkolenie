@@ -1,10 +1,10 @@
-#include "dice.hpp"
+#include "Dice.hpp"
 
 
-int dice::throwTwoDices()  {
+int Dice::throwTwoDices()  {
     return throwDice() + throwDice();
 }
 
-int dice::throwDice()  {
+int Dice::throwDice()  {
     return std::uniform_int_distribution<int>(1,DICESIZE)(generator);
 }

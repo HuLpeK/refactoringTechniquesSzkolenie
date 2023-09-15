@@ -1,10 +1,10 @@
 #pragma once
 #include <random>
 
-class dice {
+class Dice {
 public:
     int throwTwoDices();
-    dice()=default;
+    Dice()=default;
 
 private:
    int throwDice();
