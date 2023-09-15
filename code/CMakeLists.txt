@@ -1,6 +1,6 @@
 add_executable(program main.cpp
-        includes/Player.hpp
-        source/Player.cpp
+        includes/IPlayer.hpp
+        source/IPlayer.cpp
         includes/Piece.hpp
         source/Piece.cpp
         source/MonopolyGame.cpp

@@ -21,13 +21,13 @@ void Square::addActionOnBoth(std::shared_ptr<IActionOnboth> newEvent) {
 }
 
 
-void Square::processActionsOnStep(std::shared_ptr<class Player> player) {
+void Square::processActionsOnStep(std::shared_ptr<class IPlayer> player) {
     for(const auto& it : actionListOnStop)
         it->processPlayerOnStep(player);
 
 }
 
-void Square::processActionOnPassby(std::shared_ptr<struct Player> player) {
+void Square::processActionOnPassby(std::shared_ptr<class IPlayer> player) {
     for(const auto& it : actionListOnPassby)
         it->processPlayerOnPassby(player);
 

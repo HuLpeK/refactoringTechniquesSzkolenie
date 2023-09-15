@@ -1,6 +1,6 @@
 #pragma once
 
-#include "Player.hpp"
+#include "IPlayer.hpp"
 #include "Actions.hpp"
 #include "Square.hpp"
 #include "dice.hpp"
@@ -9,7 +9,7 @@
 #include <algorithm>
 #include <vector>
 
-using playerList = std::vector<Player::ptr>;
+using playerList = std::vector<IPlayer::ptr>;
 
 class MonopolyGame {
 public:
@@ -22,7 +22,7 @@ private:
     void addPlayer(const std::string &playerName);
     void checkConstrains();
     void processPlayerTurn(int currPlayerIterator);
-    void losePlayer(Player::ptr player);
+    void losePlayer(IPlayer::ptr player);
 
     dice rollingDice {};
     playerList players {};

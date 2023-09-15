@@ -1,4 +1,4 @@
-#include "Player.hpp"
+#include "IPlayer.hpp"
 #include "MonopolyGame.hpp"
 
 int main() {

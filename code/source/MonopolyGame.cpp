@@ -16,7 +16,7 @@ MonopolyGame::MonopolyGame(std::initializer_list<std::string> il) : board(std::m
 }
 
 void MonopolyGame::addPlayer(const std::string &playerName) {
-    players.push_back(std::make_shared<Player>(playerName, board));
+    players.push_back(std::make_shared<IPlayer>(playerName, board));
 }
 
 void MonopolyGame::startGame() {
@@ -30,7 +30,7 @@ void MonopolyGame::startGame() {
 }
 
 void MonopolyGame::processPlayerTurn(int currPlayerIterator) {
-    std::shared_ptr<Player> actPlayer = players[currPlayerIterator];
+    std::shared_ptr<IPlayer> actPlayer = players[currPlayerIterator];
 
     try{
         actPlayer->performMove(rollingDice.throwTwoDices());
@@ -55,7 +55,7 @@ void MonopolyGame::checkConstrains() {
         throw std::out_of_range("There is too many players");
 }
 
-void MonopolyGame::losePlayer(Player::ptr player) {
+void MonopolyGame::losePlayer(IPlayer::ptr player) {
         players.erase(std::remove(players.begin(), players.end(), player), players.end());
         lostPlayers.push_back(player);
 }

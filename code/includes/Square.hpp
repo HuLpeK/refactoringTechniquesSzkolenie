@@ -12,8 +12,8 @@ public:
     void addActionOnPassby(std::shared_ptr<IActionOnPassby> newEvent);
     void addActionOnBoth(std::shared_ptr<IActionOnboth> newEvent);
 
-    void processActionsOnStep(std::shared_ptr<class Player> player);
-    void processActionOnPassby(std::shared_ptr<class Player> player);
+    void processActionsOnStep(std::shared_ptr<class IPlayer> player);
+    void processActionOnPassby(std::shared_ptr<class IPlayer> player);
 private:
 
     std::list<std::shared_ptr<IActionOnStep>> actionListOnStop;

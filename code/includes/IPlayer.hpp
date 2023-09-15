@@ -15,26 +15,25 @@ class Piece;
 #include <memory>
 #include <vector>
 
-#define STARTINGPOSTION 0
+#define STARTINGPOSITION 0
 
-class Player : public std::enable_shared_from_this<Player>{
+class IPlayer : public std::enable_shared_from_this<IPlayer>{
 public:
-    Player(std::string playerName, std::shared_ptr<Board> bi);
+    IPlayer(std::string playerName, std::shared_ptr<Board> bi);
 
     void performMove(int diceRolled);
+
+    [[nodiscard]] int getMoney() const;
 
     void receiveMoney(int amountOfMoney);
 
     bool decideToBuy();
-    
-    bool operator==(const Player& lhs) const;
 
-    friend std::ostream& operator<<(std::ostream& out, const Player& player);
+    bool operator==(const IPlayer& lhs) const;
 
-    using ptr = std::shared_ptr<Player>;
-    [[nodiscard]] int getMoney() const;
+    friend std::ostream& operator<<(std::ostream& out, const IPlayer& player);
+    using ptr = std::shared_ptr<IPlayer>;
 private:
-    void handleMovingThroughStart(int startingPosition);
     void move(int pos);
     void moveForwardByOne();
     int getPosition();

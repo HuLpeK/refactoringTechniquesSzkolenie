@@ -5,12 +5,12 @@
 
 class IActionOnStep{
 public:
-    virtual void processPlayerOnStep(std::shared_ptr<class Player>)=0;
+    virtual void processPlayerOnStep(std::shared_ptr<class IPlayer>)=0;
 };
 
 class IActionOnPassby{
 public:
-    virtual void processPlayerOnPassby(std::shared_ptr<class Player>)=0;
+    virtual void processPlayerOnPassby(std::shared_ptr<class IPlayer>)=0;
 };
 
 class IActionOnboth : public IActionOnStep, public IActionOnPassby{
